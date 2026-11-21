@@ -1,0 +1,20 @@
+title: Juice Shop login failure burst from one source
+id: aaaa1111-bbbb-2222-cccc-333333333302
+status: experimental
+description: Many 401 responses on login API from one IP in short window
+author: Jason Morgan
+date: 2025-11-20
+tags:
+    - attack.credential_access
+    - attack.t1110
+logsource:
+    product: web
+    service: juice-shop
+detection:
+    selection:
+        cs-uri-stem: '/rest/user/login'
+        sc-status: 401
+    condition: selection
+falsepositives:
+    - Broken integration scripts
+level: medium

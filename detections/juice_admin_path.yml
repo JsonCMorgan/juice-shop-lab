@@ -1,0 +1,19 @@
+title: Access to Juice Shop admin REST API
+id: aaaa1111-bbbb-2222-cccc-333333333303
+status: experimental
+description: Requests to admin configuration endpoints
+author: Jason Morgan
+date: 2025-11-20
+tags:
+    - attack.privilege_escalation
+logsource:
+    product: web
+    service: juice-shop
+detection:
+    selection:
+        cs-uri-stem|contains: '/rest/admin'
+        sc-status: 200
+    condition: selection
+falsepositives:
+    - Authorized admin maintenance window
+level: medium

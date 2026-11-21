@@ -1,0 +1,26 @@
+title: Juice Shop style SQLi in HTTP query
+id: aaaa1111-bbbb-2222-cccc-333333333301
+status: experimental
+description: Suspicious SQL metacharacters in Juice Shop login or search parameters
+author: Jason Morgan
+date: 2025-11-20
+tags:
+    - attack.initial_access
+    - attack.t1190
+logsource:
+    product: web
+    service: juice-shop
+detection:
+    selection:
+        cs-method: GET|POST
+        cs-uri-query|contains:
+            - "'"
+            - ' or '
+            - ' OR '
+            - '--'
+            - 'union'
+            - 'UNION'
+    condition: selection
+falsepositives:
+    - Legitimate search terms containing apostrophes (tune per app)
+level: high
