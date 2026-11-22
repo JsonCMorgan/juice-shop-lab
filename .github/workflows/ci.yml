@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portfolio-structure:
+    name: Lab layout check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Required folders and docs
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f SECURITY.md
+          test -f docker-compose.yml
+          test -d detections
+          test -d tickets
+          test -d screenshots
+          test "$(find tickets -name 'LAB-*.md' | wc -l)" -ge 2
