@@ -3,17 +3,19 @@
 [![Docker](https://img.shields.io/badge/run-docker%20compose-blue)](docker-compose.yml)
 ![Cost](https://img.shields.io/badge/cost-%240-green)
 
-## For hiring managers (60-second skim)
+## What this repo is
 
-I run **[OWASP Juice Shop](https://owasp.org/www-project-juice-shop/)** locally, complete representative **OWASP Top 10** challenges, and for each one document:
+I run **[OWASP Juice Shop](https://owasp.org/www-project-juice-shop/)** locally, work representative **OWASP Top 10** challenges, and for each one I document:
 
 1. What the attack looks like in **HTTP / application logs**
 2. A **detection idea** (Sigma-style condition)
 3. The **fix** in plain English
 
-That shows defender thinking, not just CTF badges.
+I'm not chasing CTF badges for their own sake. I want defender thinking I can explain out loud.
 
 **Related:** [boundry-ai-soc-platform](https://github.com/JsonCMorgan/boundry-ai-soc-platform) SIEM ingest for app events.
+
+Sanitized tickets: [tickets/](tickets/). Detections: [detections/](detections/).
 
 ---
 
@@ -34,13 +36,13 @@ Stop:
 docker compose down
 ```
 
-**Safety:** Expose only on `127.0.0.1`. Never put an unpatched Juice Shop on the public internet.
+**Safety:** Expose only on `127.0.0.1`. I never put an unpatched Juice Shop on the public internet.
 
 ---
 
 ## Exercise guide
 
-Work through [docs/challenges-blue-team.md](docs/challenges-blue-team.md) (10 challenges). Log snippets are **representative**; paste your own from container logs when you run locally.
+Work through [docs/challenges-blue-team.md](docs/challenges-blue-team.md) (10 challenges). Log snippets in the doc are **representative**; I paste my own from container logs when I run locally.
 
 | # | OWASP theme | Detection focus |
 |---|-------------|-----------------|
@@ -55,8 +57,6 @@ Work through [docs/challenges-blue-team.md](docs/challenges-blue-team.md) (10 ch
 | 9 | Logging failures | No audit trail (gap narrative) |
 | 10 | SSRF (where applicable) | Internal URL in request params |
 
-Sigma rules for several challenges live in [detections/](detections/).
-
 ---
 
 ## Repo structure
@@ -66,11 +66,13 @@ juice-shop-lab/
 ├── docker-compose.yml
 ├── docs/challenges-blue-team.md
 ├── detections/*.yml          # Sigma rules (portable)
+├── tickets/                  # Sanitized sample tickets
+├── screenshots/              # My redacted captures when I add them
 └── scripts/tail_juice_logs.ps1
 ```
 
 ---
 
-## Mentor one-liner
+## One line I use when I explain this lab
 
-"I don't only exploit Juice Shop. For each challenge I wrote what I'd see in logs and how I'd detect it on a SOC shift."
+"I don't only poke Juice Shop. For each challenge I wrote what I'd see in logs, how I'd detect it, and what I'd tell someone to fix."
